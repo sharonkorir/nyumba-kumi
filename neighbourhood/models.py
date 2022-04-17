@@ -1,5 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Neighbourhood(models.Model):
@@ -28,3 +29,13 @@ class Neighbourhood(models.Model):
     def update_neighbourhd(self, name):
       self.name = name
       self.save()
+
+class Profile(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60, blank=True)
+    bio = models.TextField(max_length=254, blank=True)
+    profile_photo = CloudinaryField('image')
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
