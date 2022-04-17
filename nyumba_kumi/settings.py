@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'neighbourhood',
     'cloudinary',
+    'users',
+    'crispy_forms',
+    'crispy_forms_materialize'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +135,9 @@ cloudinary.config(
   api_key = "234513846171837", 
   api_secret = "OA9M_lr-Xk7bRiodzdT4-nmVfkI" 
 )
+
+#configure crispy forms
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
