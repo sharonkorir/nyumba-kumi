@@ -1,0 +1,20 @@
+{% extends 'users/base.html' %}
+{% block content %}
+  {{ block.super }}
+  <div class="container">
+    <div class="row" style="padding-top: 100px;">
+      <div class="col s12 m2 l3"></div>
+      <div class="col s12 m8 l6" id="login">
+        <h5>You have been logged out successfully</h5>
+      <div>
+      <div class="col s12 m2 l3"></div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+      <div class="col s12 m2 l3"></div>
+      <div class="col s12 m8 l6">
+        <a href="{% url 'login' %}"> Log In</a>
+      <div>
+      <div class="col s12 m2 l3"></div>
+    </div>
+  </div>
+{% endblock %}
