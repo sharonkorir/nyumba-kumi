@@ -36,7 +36,7 @@ def create_neighbourhood(request):
             neighbourhood = form.save(commit=False)
             neighbourhood.admin = request.user.profile.pk
             neighbourhood.save()
-            return redirect('index')
+            return redirect('neighbourhoods')
     else:
         form = CreateNeighbourhoodForm()
     return render(request, 'neighbourhoods/create_neighbourhood.html', {'form':form})
