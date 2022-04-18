@@ -22,6 +22,10 @@
         <p style="padding-right: 10px;"><b>{{neighbourhood.name}}</b></p>
         <p><a href="{% url 'change_neighbourhood' neighbourhood.pk %}">Change Neighbourhood</a></p>
       </div>
+      <!--alerts-->
+      <div class="row" style="display: flex;">
+        <p>{{neighbourhood.name}} alerts</p>
+      </div>
       
       <div class="row">
         <p>{{neighbourhood.description}}</p>
@@ -46,6 +50,16 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
           </div>
         </div>
+      </div>
+      <!--businesses-->
+      <div class="row">
+        <p>business</p>
+        {% if business.owner == user %}
+          <div style="padding-left: 10px;">
+            <a href="{% url 'business_update' business.pk %}"><i class="material-icons black-text">create</i></a>
+            <a href="{% url 'business_delete' business.pk %}"><i class="material-icons black-text">delete</i></a>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div> 

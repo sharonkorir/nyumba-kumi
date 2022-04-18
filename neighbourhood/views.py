@@ -85,21 +85,7 @@ def neighbourhood_details(request,pk):
     
     return render(request, 'neighbourhoods/neighbourhood_details.html', context)
 
-# def create_business(request,pk):
-#     submitted = False
-#     neighbourhood = Neighbourhood.objects.filter(id=pk)
-#     if request.method == 'POST':
-#         form = CreateBusinessForm(request.POST)
-        
-#         if form.is_valid():
-#             alert = form.save(commit=False)
-#             alert.owner = request.user
-#             alert.neighbourhood = request.user.profile.neighbourhood
-#             alert.save()
-#             return redirect('neighbourhood_details',pk)
-#     else:
-#         form = CreateAlertForm()
-#     return render(request, 'neighbourhoods/create_post.html', {'form':form})
+
 def create_business(request, pk):
     if request.method == 'POST':
         b_form = CreateBusinessForm(request.POST, request.FILES)
