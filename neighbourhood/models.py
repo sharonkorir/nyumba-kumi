@@ -1,4 +1,4 @@
-from email.policy import default
+
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
@@ -12,6 +12,7 @@ class Neighbourhood(models.Model):
     health_dept = models.IntegerField(null=True, blank=True)
     police_dept = models.IntegerField(null=True, blank=True)
     admin = models.IntegerField("neighbourhood admin", blank=False, default=1)
+    description = models.TextField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name

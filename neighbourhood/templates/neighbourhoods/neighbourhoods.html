@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!--display messages-->
+{% if messages %}
+  {% for message in messages %}
+    <div class="container center-align">
+      <div>
+        {{ message }}
+      </div> 
+    </div>
+  {% endfor %}
+{% endif %}
+<div class="container-fluid">
+  <div class="row center-align" style="display: flex; justify-content: center; align-items: center; padding-top:50px;">
+    <div class="card-image" style="height: 250px; width: 250px; padding: 40px;">
+    {% for neighbourhood in neighbourhoods %}
+      <!-- {% if user.profile_photo %}
+        <img src="{{user.profile_photo.url}}" alt="" class="circle responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
+      {% else %}
+        <img src="http://www.gravatar.com/avatar/?d=mp" alt="" class="circle responsive-img">
+      {% endif %} -->
+    </div>
+    <div>
+      <div class="row" style="display: flex;">
+        <p style="padding-right: 10px;"><b>{{neighbourhood.name}}</b></p>
+        <p><a href="{% url 'join_neighbourhood' neighbourhood.pk %}">Join Neighbourhood</a></p>
+      </div>
+      <!-- <div class="row" style="display: flex;">
+        <p style="padding-right: 10px;"><b></b> posts </p>
+        <p style="padding-right: 10px;"> followers </p>
+        <p style="padding-right: 10px;"> following </p>
+      </div> -->
+      <div class="row">
+        <p>{{neighbourhood.description}}</p>
+      </div>
+    </div>
+  </div> 
+  {% endfor %} 
+   
+  
+</div>
+
+<!--footer-->
+<div class="section center" style="color: #8c9395;">
+  <p>2022 nyumba-kumi</p>
+</div>
+
+
+{% endblock %}

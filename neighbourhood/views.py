@@ -1,7 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import Business
+
+import neighbourhood
+from .models import Business, Neighbourhood
 from .forms import CreateNeighbourhoodForm
 
 # Create your views here.
@@ -34,8 +36,26 @@ def create_neighbourhood(request):
             neighbourhood = form.save(commit=False)
             neighbourhood.admin = request.user.profile.pk
             neighbourhood.save()
-            return redirect('neighbourhood')
+            return redirect('index')
     else:
         form = CreateNeighbourhoodForm()
     return render(request, 'neighbourhoods/create_neighbourhood.html', {'form':form})
+
+def join_neighbourhood(request,pk):
+    neighbourhood = get_object_or_404(Neighbourhood, id=pk)
+    user = request.user
+    user.profile.neighbourhood = neighbourhood
+    user.profile.save()
+    return redirect('neighbourhoods')
+
+def change_neighbourhood(request, pk):
+    neighbourhood = get_object_or_404(Neighbourhood, id=pk)
+    user = request.user
+    user.profile.neighbourhood = None
+    user.profile.save()
+    return redirect('neighbourhoods')
+
+def neighbourhoods(request):
+    neighbourhoods = Neighbourhood.objects.all()
+    return render(request, 'neighbourhoods/neighbourhoods.html', {'neighbourhoods':neighbourhoods})
         
