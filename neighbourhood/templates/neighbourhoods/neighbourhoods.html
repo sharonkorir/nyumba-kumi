@@ -18,11 +18,16 @@
     </button>
   </div>
   <div class="row center-align">
+  
     {% for neighbourhood in neighbourhoods %}
     <div class="col s12 m4 l3" style="padding: 0px;" >
       <div class="card-panel hoverable" id="card">
         <div class="card-image">
+          {% if neighbourhood.logo %}
+          <img src="{{neighbourhood.logo.url}}" alt="" class=" responsive-img">
+          {% else %}
           <img src="/static/photos/neighbourhood.jpg" alt="" class=" responsive-img">
+          {% endif %}
         </div>
         <div class="card-content" style="display: flex; justify-content: space-between;">
           <p style="padding-right: 10px;"><b>Name: </b>{{neighbourhood.name}}</p>
@@ -34,10 +39,11 @@
           </button>
         </div>
       </div>
+      
     </div>
+    {% endfor %} 
   </div> 
-  {% endfor %} 
-  
+ 
 </div>
 <!--footer-->
 <div class="section center" style="color: grey; position: fixed; bottom: 0%; width: 100%;">

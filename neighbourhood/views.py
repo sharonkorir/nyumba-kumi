@@ -1,3 +1,4 @@
+import profile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -46,7 +47,7 @@ def join_neighbourhood(request,pk):
     user = request.user
     user.profile.neighbourhood = neighbourhood
     user.profile.save()
-    return redirect('neighbourhoods')
+    return redirect('neighbourhood_details', pk)
 
 def change_neighbourhood(request, pk):
     neighbourhood = get_object_or_404(Neighbourhood, id=pk)

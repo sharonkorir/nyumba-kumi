@@ -11,45 +11,73 @@
     </div>
   {% endfor %}
 {% endif %}
-<div class="container-fluid">
-  <div class="row center-align" style="display: flex; justify-content: center; align-items: center; padding-top:50px;">
+{% for neighbourhood in neighbourhood %}
+<div class="container">
+  <div class="row center-align">
+    <p>Moving out?</p>
+    <button class="btn"><a href="{% url 'change_neighbourhood' neighbourhood.pk %}" class="white-text">Change Neighbourhood</a></button>
+  </div>
+  <!--neighbourhood profile-->
+  <div class="row center-align">
     <div class="card-image" style="height: 250px; width: 250px; padding: 40px;">
-    {% for neighbourhood in neighbourhood %}
+    
+      {% if neighbourhood.logo %}
+        <img src="{{neighbourhood.logo.url}}" alt="" class="responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
+      {% else %}
+        <img src="/static/photos/neighbourhood.jpg" alt="" class="responsive-img">
+      {% endif %}
       
     </div>
-    <div>
-      <div class="row" style="display: flex;">
-        <p style="padding-right: 10px;"><b>{{neighbourhood.name}}</b></p>
-        <p><a href="{% url 'change_neighbourhood' neighbourhood.pk %}">Change Neighbourhood</a></p>
+  </div>
+  <!--profile card-->
+  <div class="row center-align">
+    <p style="padding-right: 10px;">Name: <b>{{neighbourhood.name}}</b></p>
+    <p style="padding-right: 10px;">Location: <b>{{neighbourhood.location}}</b></p>
+  </div>
+  <div class="row center-align">
+    <p style="padding-right: 10px;"><b>{{businesses|length}}</b> businesses </p>
+    <p style="padding-right: 10px;"> <b>{{alerts|length}}</b> posts </p>
+    <p style="padding-right: 10px;"> <b>{{profile|length}}</b> occupants </p>
+  </div>
+  <div class="row center-align">
+    <p>{{neighbourhood.description}}</p>
+  </div>
+  <!--end profile card-->
+
+  <div class="row" style="display: flex;">
+    <button class="btn">
+      <a href="{% url 'create_business' neighbourhood.pk %}">Create business</a>
+    </button>
+    <!-- Modal Trigger -->
+    <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
+    <!-- Modal Structure -->
+    <div id="modal1{{neighbourhood.id}}" class="modal">
+      <div class="modal-content">
+        <h4>Write a post</h4>
+        <form action="" method = 'POST' class="input-field col s12" id="postform">
+          {% csrf_token %}
+          <!--render form fields as paragraph-->
+          {{ form|crispy }}
+          <button type="submit" class="col s12 waves-effect waves-light btn" form="postform">Post</button>
+        </form>
       </div>
-      <!--alerts-->
-      <div class="row" style="display: flex;">
-        <p>{{neighbourhood.name}} alerts</p>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
       </div>
+    </div>
+    <!--end modal-->
+  </div>
+  {% endfor %} 
+ 
+      
+  <!--alerts-->
+  <div class="row" style="display: flex;">
+    <p>{{neighbourhood.name}} alerts</p>
+  </div>
       
       <div class="row">
-        <p>{{neighbourhood.description}}</p>
-        <a href="{% url 'create_business' neighbourhood.pk %}">Create business</a>
-        <!-- Modal Trigger -->
-        <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
-        <!-- Modal Structure -->
-        <div id="modal1{{neighbourhood.id}}" class="modal">
-          <div class="modal-content">
-            <h4>Write a post</h4>
-            <form action="" method = 'POST' class="input-field col s12" id="postform">
-              {% csrf_token %}
-              
-              <!--render form fields as paragraph-->
-              {{ form|crispy }}
-              
-              <button type="submit" class="col s12 waves-effect waves-light btn" form="postform">Post</button>
-            
-            </form>
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
+        
+        
       </div>
       <!--businesses-->
       <div class="row">
@@ -63,13 +91,13 @@
       </div>
     </div>
   </div> 
-  {% endfor %} 
+  
    
   
 </div>
 
 <!--footer-->
-<div class="section center" style="color: #8c9395;">
+<div class="section center" style="color: grey; position: fixed; bottom: 0%; width: 100%;">
   <p>2022 nyumba-kumi</p>
 </div>
 

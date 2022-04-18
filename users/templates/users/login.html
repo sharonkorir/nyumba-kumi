@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
   {{ block.super }}
@@ -6,7 +6,7 @@
     <div class="row" style="padding-top: 100px;">
       <div class="col s12 m3 l3"></div>
       <div class="col s12 m6 l6" id="login">
-        <h2 class="nyumba-kumi">nyumba-kumi</h2>
+        <h4 class="nyumba-kumi">nyumba-kumi</h4>
         <form action="" method = 'POST' class="input-field col s12">
           {% csrf_token %}
           
@@ -18,17 +18,16 @@
       </div>
       <div class="col s12 m3 l3"></div>
     </div> 
-    <div class="row">
-      <div class="col s12 m3 l3"></div>
-      <div class="col s12 m6 l6" id="login2">
+    <div class="row center-align">
+      
         <p>Don't have an account? <a href="{% url 'register' %}"><strong>Sign up</strong></a></p>
-      </div>
-      <div class="col s12 m3 l3"></div>
+      
     </div>
   </div>
   <!--footer-->
-  <div class="section center" style="color: #8c9395;">
-    <p>2022 nyumba-kumi</p>
-  </div>
+<div class="section center" style="color: grey; position: fixed; bottom: 0%; width: 100%;">
+  <p>2022 nyumba-kumi</p>
+</div>
+
           
 {% endblock %}
