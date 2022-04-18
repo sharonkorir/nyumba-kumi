@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
-    logo = CloudinaryField('image', blank=True, default='static/photos/neighbourhood.jpg')
+    logo = CloudinaryField('image', blank=True)
     health_dept = models.IntegerField(null=True, blank=True)
     police_dept = models.IntegerField(null=True, blank=True)
     admin = models.IntegerField("neighbourhood admin", blank=False, default=1)
@@ -46,7 +46,7 @@ class Profile(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=60)
-    logo = CloudinaryField('image', blank=True, default='static/photos/business.jpg')
+    logo = CloudinaryField('image', blank=True)
     description = models.TextField(max_length=200, blank=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
