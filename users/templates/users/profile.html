@@ -1,6 +1,48 @@
 {% extends 'users/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>{{user.username}}</h1>
-          
+
+<!--display messages-->
+{% if messages %}
+  {% for message in messages %}
+    <div class="container center-align">
+      <div>
+        {{ message }}
+      </div> 
+    </div>
+  {% endfor %}
+{% endif %}
+
+  <div class="container-fluid">
+    <div class="row center-align" style="display: flex; justify-content: center; align-items: center; padding-top:50px;">
+      <div class="card-image" style="height: 250px; width: 250px; padding: 40px;">
+      
+        {% if user.profile_photo %}
+          <img src="{{user.profile_photo.url}}" alt="" class="circle responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
+        {% else %}
+          <img src="http://www.gravatar.com/avatar/?d=mp" alt="" class="circle responsive-img">
+        {% endif %}
+        
+      </div>
+      <div>
+        <div class="row" style="display: flex;">
+          <p style="padding-right: 10px;"><b>{{user.username}}</b></p>
+          <p><a href="">Edit Profile</a></p>
+        </div>
+        <!-- <div class="row" style="display: flex;">
+          <p style="padding-right: 10px;"><b>{{posts|length}}</b> posts </p>
+          <p style="padding-right: 10px;"> followers </p>
+          <p style="padding-right: 10px;"> following </p>
+        </div> -->
+        <div class="row">
+          <p>{{user.bio}}</p>
+        </div>
+      </div>
+    </div> 
+   
+
+  <!--footer-->
+  <div class="section center" style="color: #8c9395;">
+    <p>2022 nyumba-kumi</p>
+  </div>
 {% endblock %}
