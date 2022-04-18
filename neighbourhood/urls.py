@@ -7,6 +7,7 @@ urlpatterns=[
   path('new_neighbourhood/', views.create_neighbourhood, name='new_neighbourhood'),
   path('neighbourhoods/', views.neighbourhoods, name='neighbourhoods'),
   path('join_neighbourhood/<int:pk>', views.join_neighbourhood, name='join_neighbourhood'),
-  path('change_neighbourhood/<id>', views.change_neighbourhood, name='change_neighbourhood'),
+  path('change_neighbourhood/<int:pk>', views.change_neighbourhood, name='change_neighbourhood'),
+  path('neighbourhood/<int:pk>', views.neighbourhood_details, name='neighbourhood_details'),
   
 ]

@@ -58,4 +58,12 @@ def change_neighbourhood(request, pk):
 def neighbourhoods(request):
     neighbourhoods = Neighbourhood.objects.all()
     return render(request, 'neighbourhoods/neighbourhoods.html', {'neighbourhoods':neighbourhoods})
-        
+
+def neighbourhood_details(request,pk):
+    neighbourhood = Neighbourhood.objects.filter(id=pk)
+    businesses = Business.objects.filter(neighbourhood=neighbourhood)
+    context ={
+      'neighbourhood':neighbourhood,
+      'businesses': businesses,
+    }
+    return render(request, 'neighbourhoods/neighbourhood_details.html', context)
