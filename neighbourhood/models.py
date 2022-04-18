@@ -82,3 +82,6 @@ class Alerts(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+    def __str__(self):
+      return self.name

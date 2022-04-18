@@ -1,11 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-
-import neighbourhood
 from .models import Alerts, Business, Neighbourhood
 from .forms import CreateAlertForm, CreateNeighbourhoodForm
 from django.contrib import messages
+from django.views.generic import CreateView
 
 # Create your views here.
 @login_required()
@@ -64,25 +63,40 @@ def neighbourhood_details(request,pk):
     neighbourhood = Neighbourhood.objects.filter(id=pk)
     businesses = Business.objects.filter(neighbourhood=neighbourhood)
     alerts = Alerts.objects.filter(neighbourhood=neighbourhood)
-    
-    context ={
-      'neighbourhood':neighbourhood,
-      'businesses': businesses,
-      'alerts': alerts,
-      
-    }
-    return render(request, 'neighbourhoods/neighbourhood_details.html', context)
-
-def create_post(request, pk):
     if request.method == 'POST':
-        form = CreateAlertForm(request.POST, request.FILES)
-        neighbourhood = Neighbourhood.objects.filter(id=pk)
+        form = CreateAlertForm(request.POST)
+        
         if form.is_valid():
             alert = form.save(commit=False)
-            alert.profile = request.user.profile.pk
-            alert.neighbourhood = neighbourhood
+            alert.owner = request.user.profile
+            alert.neighbourhood = request.user.profile.neighbourhood
             alert.save()
             return redirect('neighbourhood_details',pk)
     else:
         form = CreateAlertForm()
-    return render(request, 'neighbourhoods/create_post.html', {'form':form})
+    context ={
+      'neighbourhood':neighbourhood,
+      'businesses': businesses,
+      'alerts': alerts,
+      'form': form,
+    }
+    return render(request, 'neighbourhoods/neighbourhood_details.html', context)
+    
+    
+    return render(request, 'neighbourhoods/neighbourhood_details.html', context)
+
+# def create_post(request,pk):
+#     submitted = False
+#     neighbourhood = Neighbourhood.objects.filter(id=pk)
+#     if request.method == 'POST':
+#         form = CreateAlertForm(request.POST)
+        
+#         if form.is_valid():
+#             alert = form.save(commit=False)
+#             alert.owner = request.user
+#             alert.neighbourhood = request.user.profile.neighbourhood
+#             alert.save()
+#             return redirect('neighbourhood_details',pk)
+#     else:
+#         form = CreateAlertForm()
+#     return render(request, 'neighbourhoods/create_post.html', {'form':form})

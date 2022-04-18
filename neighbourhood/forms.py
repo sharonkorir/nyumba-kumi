@@ -13,4 +13,4 @@ class CreateAlertForm(forms.ModelForm):
 
     class Meta:
         model = Alerts
-        exclude = ['profile', 'neighbourhood']
+        fields = ['name', 'content']

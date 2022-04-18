@@ -26,8 +26,25 @@
       <div class="row">
         <p>{{neighbourhood.description}}</p>
         <p>create business</p>
-        <a href="{% url 'create_post' neighbourhood.pk %}">create post</a>
-        
+        <!-- Modal Trigger -->
+        <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
+        <!-- Modal Structure -->
+        <div id="modal1{{neighbourhood.id}}" class="modal">
+          <div class="modal-content">
+            <h4>Write a post</h4>
+            <form action="" method = 'POST' class="input-field col s12" id="postform">
+              {% csrf_token %}
+              
+              <!--render form fields as paragraph-->
+              {{ form|crispy }}
+              
+              <button type="submit" class="col s12 waves-effect waves-light btn" form="postform">Post</button>
+            
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+          </div>
         </div>
       </div>
     </div>

@@ -9,6 +9,6 @@ urlpatterns=[
   path('join_neighbourhood/<int:pk>', views.join_neighbourhood, name='join_neighbourhood'),
   path('change_neighbourhood/<int:pk>', views.change_neighbourhood, name='change_neighbourhood'),
   path('neighbourhood/<int:pk>', views.neighbourhood_details, name='neighbourhood_details'),
-  path('neighbourhood/<int:pk>/create_post', views.create_post, name='create_post'),
+  
   
 ]
