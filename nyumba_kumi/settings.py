@@ -151,3 +151,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sharon.moringaprojects@gmail.com'
 EMAIL_HOST_PASSWORD = 'xefqtqdykkqzfozu'
 
+#redirect on log in
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'

@@ -7,21 +7,22 @@
           <!--search for projects-->
           <form id="search-site" action="" method='get'>
             <div class="input-field">
-              <input placeholder="Search projects..."  id="search" type="text" class="validate" name="project">
+              <input placeholder="Find a business..."  id="search" type="text" class="validate" name="project">
             </div>
           </form>
         </li>
         <!--navbar icons-->
         <li><a href="/"><i class="material-icons white-text">home</i></a></li>
-        
+        {% if user.is_authenticated %}
+          <li><a href=""><i class="material-icons white-text">add</i></a></li>
           <li><a href=""><i class="material-icons white-text">account_circle</i></a></li>
           <li><a href=""><i class="material-icons white-text">exit_to_app</i></a></li>
-          <li><a href=""><i class="material-icons white-text">add</i></a></li>
-        
-          <li><a href=""><i class="material-icons white-text ">add</i></a></li>
+          
+        {% else %}
+          <!-- <li><a href=""><i class="material-icons white-text ">add</i></a></li> -->
           <li><a href="">login</a></li>
           <li><a href="" class="">register</a></li>
-        
+        {% endif %}
       </ul>
     </div>
   </nav>
