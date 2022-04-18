@@ -5,7 +5,7 @@ from .models import EmailRecipients
 
 from neighbourhood.models import Profile
 from users.email import send_welcome_email
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -34,4 +34,22 @@ def register(request):
     
 @login_required()
 def profile(request):
-    return render(request,'users/profile.html')
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid and p_form.is_valid:
+            u_form.save()
+            p_form.save()
+
+            messages.success(request, f'Your nyumba kumi account had been updated successfully')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+      'u_form':u_form,
+      'p_form': p_form,
+    }
+    return render(request,'users/profile.html', context)

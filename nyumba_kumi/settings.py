@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'neighbourhood',
     'cloudinary',
-    'users',
+    'users.apps.UsersConfig',
     'crispy_forms',
     'crispy_forms_materialize'
 ]
