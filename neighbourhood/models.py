@@ -46,7 +46,7 @@ class Profile(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=60)
-    logo = CloudinaryField('image')
+    logo = CloudinaryField('image', blank=True, default='static/photos/business.jpg')
     description = models.TextField(max_length=200, blank=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

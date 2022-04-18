@@ -1,6 +1,6 @@
 
 from django import forms
-from .models import Alerts, Neighbourhood
+from .models import Alerts, Business, Neighbourhood
 
 #update profile email and username
 class CreateNeighbourhoodForm(forms.ModelForm):
@@ -14,3 +14,13 @@ class CreateAlertForm(forms.ModelForm):
     class Meta:
         model = Alerts
         fields = ['name', 'content']
+
+class CreateBusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['owner', 'neighbourhood']
+
+class BusinessUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['owner', 'neighbourhood']

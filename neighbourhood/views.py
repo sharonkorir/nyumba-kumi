@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Alerts, Business, Neighbourhood
-from .forms import CreateAlertForm, CreateNeighbourhoodForm
+from .forms import CreateAlertForm, CreateBusinessForm, CreateNeighbourhoodForm
 from django.contrib import messages
 from django.views.generic import CreateView
 
@@ -85,11 +85,11 @@ def neighbourhood_details(request,pk):
     
     return render(request, 'neighbourhoods/neighbourhood_details.html', context)
 
-# def create_post(request,pk):
+# def create_business(request,pk):
 #     submitted = False
 #     neighbourhood = Neighbourhood.objects.filter(id=pk)
 #     if request.method == 'POST':
-#         form = CreateAlertForm(request.POST)
+#         form = CreateBusinessForm(request.POST)
         
 #         if form.is_valid():
 #             alert = form.save(commit=False)
@@ -100,3 +100,23 @@ def neighbourhood_details(request,pk):
 #     else:
 #         form = CreateAlertForm()
 #     return render(request, 'neighbourhoods/create_post.html', {'form':form})
+def create_business(request, pk):
+    if request.method == 'POST':
+        b_form = CreateBusinessForm(request.POST, request.FILES)
+        if b_form.is_valid:
+            business = b_form.save(commit=False)
+            business.owner = request.user
+            business.neighbourhood = request.user.profile.neighbourhood
+            b_form.save()
+
+            messages.success(request, f'Your business has been created successfully')
+            return redirect('neighbourhood_details',pk)
+
+    else:
+        b_form = CreateBusinessForm(instance=request.user)
+        
+
+    context = {
+      'b_form':b_form,
+    }
+    return render(request,'business/create_business.html', context)

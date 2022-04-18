@@ -25,7 +25,7 @@
       
       <div class="row">
         <p>{{neighbourhood.description}}</p>
-        <p>create business</p>
+        <a href="{% url 'create_business' neighbourhood.pk %}">Create business</a>
         <!-- Modal Trigger -->
         <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
         <!-- Modal Structure -->
