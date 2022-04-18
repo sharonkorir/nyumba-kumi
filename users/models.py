@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Newsletter(models.Model):
+class EmailRecipients(models.Model):
     '''
     EmailRecepients model acts as blueprint for all email recepients on registation
     '''

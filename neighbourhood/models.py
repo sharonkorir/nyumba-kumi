@@ -31,11 +31,11 @@ class Neighbourhood(models.Model):
       self.save()
 
 class Profile(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    # username = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=60, blank=True)
     bio = models.TextField(max_length=200, blank=True)
     profile_photo = CloudinaryField('image')
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.DO_NOTHING)
+    # neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

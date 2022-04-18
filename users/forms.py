@@ -15,11 +15,11 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class ProfileUpdateForm(forms.ModelForm):
-    '''
-    Form that inherits from the django ModelForm and allows user to update their profile
-    '''
+# class ProfileUpdateForm(forms.ModelForm):
+#     '''
+#     Form that inherits from the django ModelForm and allows user to update their profile
+#     '''
 
-    class Meta:
-        model = Profile
-        fields = ['profile_photo', 'bio']
+#     class Meta:
+#         model = Profile
+#         fields = ['profile_photo', 'bio']

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Newsletter
+from .models import EmailRecipients
 
 from neighbourhood.models import Profile
 from users.email import send_welcome_email
@@ -20,7 +20,7 @@ def register(request):
         username = form.cleaned_data['username']
         email = form.cleaned_data['email']
         #welcome email
-        recipient = Newsletter(name = username,email =email)
+        recipient = EmailRecipients(name = username,email =email)
         recipient.save()
         send_welcome_email(username,email)
         #succesful log in message
@@ -28,6 +28,6 @@ def register(request):
         
         return redirect('login')
     else:
-      form = UserRegistrationForm()
+        form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form': form})
     
