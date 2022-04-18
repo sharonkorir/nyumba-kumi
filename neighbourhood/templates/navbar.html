@@ -1,8 +1,9 @@
 <div class="navbar-fixed">
   <nav >
     <div class="nav-wrapper" style="padding-bottom: 0;">
-      <a href="{% url 'index' %}" class="brand-logo left white-text">nyumba-kumi</a>
-      <ul class="right">
+      <a href="{% url 'index' %}" class="brand-logo left white-text">nyumbakumi</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
         <li>
           <!--search for projects-->
           <form id="search-site" action="{% url 'search_results' %}" method='get'>
@@ -15,16 +16,28 @@
         <li><a href="/"><i class="material-icons white-text">home</i></a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'new_neighbourhood' %}"><i class="material-icons white-text">add</i></a></li>
-          <li><a href=""><i class="material-icons white-text">create</i></a></li>
+          <!-- <li><a href=""><i class="material-icons white-text">create</i></a></li> -->
           <li><a href="{% url 'profile' %}"><i class="material-icons white-text">account_circle</i></a></li>
           <li><a href="{% url 'logout' %}"><i class="material-icons white-text">exit_to_app</i></a></li>
           
         {% else %}
-          <!-- <li><a href=""><i class="material-icons white-text ">add</i></a></li> -->
           <li><a href="{% url 'login' %}">login</a></li>
           <li><a href="{% url 'register' %}" class="">register</a></li>
         {% endif %}
       </ul>
     </div>
   </nav>
+  
 </div>
+<ul class="sidenav" id="mobile-demo">
+  <li><a href="/"><i class="material-icons white-text">home</i></a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'new_neighbourhood' %}" class="white-text"><i class="material-icons white-text">add</i>create neighbourhood</a></li>
+        <li><a href="{% url 'profile' %}" class="white-text"><i class="material-icons white-text">account_circle</i>view profile</a></li>
+        <li><a href="{% url 'logout' %}" class="white-text"><i class="material-icons white-text">exit_to_app</i>log out</a></li>
+        
+      {% else %}
+        <li><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'register' %}" class="">register</a></li>
+      {% endif %}
+</ul>

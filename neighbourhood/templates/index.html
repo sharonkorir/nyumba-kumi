@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>test base</p>
-<p>join neighbourhood</p>
-<a href="{% url 'neighbourhoods' %}">join a neighbourhood</a>
+<div class="container-fluid">
+  <div class="row" style="display: flex; justify-content: center; align-items: center;">
+    <a href="{% url 'neighbourhoods' %}">find your neighbourhood</a>
+  </div>
+</div>
+<!--footer-->
+<!--footer-->
+<div class="section center" style="color: white; position: fixed; bottom: 0%; width: 100%;">
+  <p>2022 nyumba-kumi</p>
+</div>
 {% endblock %}
