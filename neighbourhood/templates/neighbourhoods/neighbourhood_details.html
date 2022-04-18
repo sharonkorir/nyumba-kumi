@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
   <!--display messages-->
 {% if messages %}
@@ -25,7 +26,9 @@
       <div class="row">
         <p>{{neighbourhood.description}}</p>
         <p>create business</p>
-        <p>create post</p>
+        <a href="{% url 'create_post' neighbourhood.pk %}">create post</a>
+        
+        </div>
       </div>
     </div>
   </div> 
