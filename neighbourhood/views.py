@@ -1,7 +1,8 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-
-from neighbourhood.models import Business
+from .models import Business
+from .forms import CreateNeighbourhoodForm
 
 # Create your views here.
 @login_required()
@@ -25,3 +26,16 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
+
+def create_neighbourhood(request):
+    if request.method == 'POST':
+        form = CreateNeighbourhoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            neighbourhood = form.save(commit=False)
+            neighbourhood.admin = request.user.profile.pk
+            neighbourhood.save()
+            return redirect('neighbourhood')
+    else:
+        form = CreateNeighbourhoodForm()
+    return render(request, 'neighbourhoods/create_neighbourhood.html', {'form':form})
+        

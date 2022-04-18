@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'nyumba_kumi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hoodwatch',
+        'NAME': 'nyumbakumi',
         'USER': 'sharon',
         'PASSWORD': '12345678',
     }

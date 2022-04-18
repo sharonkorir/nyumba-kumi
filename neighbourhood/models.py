@@ -1,14 +1,17 @@
+from email.policy import default
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
-    logo = CloudinaryField('image')
+    logo = CloudinaryField('image', blank=True, default='static/photos/neighbourhood.jpg')
     health_dept = models.IntegerField(null=True, blank=True)
     police_dept = models.IntegerField(null=True, blank=True)
+    admin = models.IntegerField("neighbourhood admin", blank=False, default=1)
 
     def __str__(self):
         return self.name
