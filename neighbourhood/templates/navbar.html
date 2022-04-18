@@ -5,9 +5,9 @@
       <ul class="right">
         <li>
           <!--search for projects-->
-          <form id="search-site" action="" method='get'>
+          <form id="search-site" action="{% url 'search_results' %}" method='get'>
             <div class="input-field">
-              <input placeholder="Find a business..."  id="search" type="text" class="validate" name="project">
+              <input placeholder="Find a business..."  id="search" type="text" class="validate" name="business">
             </div>
           </form>
         </li>
@@ -15,13 +15,13 @@
         <li><a href="/"><i class="material-icons white-text">home</i></a></li>
         {% if user.is_authenticated %}
           <li><a href=""><i class="material-icons white-text">add</i></a></li>
-          <li><a href=""><i class="material-icons white-text">account_circle</i></a></li>
-          <li><a href=""><i class="material-icons white-text">exit_to_app</i></a></li>
+          <li><a href="{% url 'profile' %}"><i class="material-icons white-text">account_circle</i></a></li>
+          <li><a href="{% url 'logout' %}"><i class="material-icons white-text">exit_to_app</i></a></li>
           
         {% else %}
           <!-- <li><a href=""><i class="material-icons white-text ">add</i></a></li> -->
-          <li><a href="">login</a></li>
-          <li><a href="" class="">register</a></li>
+          <li><a href="{% url 'login' %}">login</a></li>
+          <li><a href="{% url 'register' %}" class="">register</a></li>
         {% endif %}
       </ul>
     </div>
