@@ -16,7 +16,7 @@
         <li><a href="/"><i class="material-icons white-text">home</i></a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'new_neighbourhood' %}"><i class="material-icons white-text">add</i></a></li>
-          <!-- <li><a href=""><i class="material-icons white-text">create</i></a></li> -->
+          <li> <a href="{% url 'neighbourhood_details' request.user.profile.neighbourhood.pk %}" class="white-text"><i class="material-icons white-text">business</i>View hood</a></li>
           <li><a href="{% url 'profile' %}"><i class="material-icons white-text">account_circle</i></a></li>
           <li><a href="{% url 'logout' %}"><i class="material-icons white-text">exit_to_app</i></a></li>
           
@@ -33,6 +33,7 @@
   <li><a href="/"><i class="material-icons white-text">home</i></a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url 'new_neighbourhood' %}" class="white-text"><i class="material-icons white-text">add</i>create neighbourhood</a></li>
+        <li> <a href="{% url 'neighbourhood_details' request.user.profile.neighbourhood.pk %}" class="white-text"><i class="material-icons white-text">business</i>View hood</a></li>
         <li><a href="{% url 'profile' %}" class="white-text"><i class="material-icons white-text">account_circle</i>view profile</a></li>
         <li><a href="{% url 'logout' %}" class="white-text"><i class="material-icons white-text">exit_to_app</i>log out</a></li>
         
