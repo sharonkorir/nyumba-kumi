@@ -62,8 +62,8 @@ def neighbourhoods(request):
 
 def neighbourhood_details(request,pk):
     neighbourhood = Neighbourhood.objects.filter(id=pk)
-    businesses = Business.objects.filter(neighbourhood=neighbourhood)
-    alerts = Alerts.objects.filter(neighbourhood=neighbourhood)
+    businesses = Business.objects.filter(neighbourhood=pk)
+    alerts = Alerts.objects.filter(neighbourhood=pk)
     if request.method == 'POST':
         form = CreateAlertForm(request.POST)
         
@@ -82,11 +82,7 @@ def neighbourhood_details(request,pk):
       'form': form,
     }
     return render(request, 'neighbourhoods/neighbourhood_details.html', context)
-    
-    
-    return render(request, 'neighbourhoods/neighbourhood_details.html', context)
-
-
+  
 def create_business(request, pk):
     if request.method == 'POST':
         b_form = CreateBusinessForm(request.POST, request.FILES)

@@ -13,3 +13,11 @@
   padding-left: 40px;
   padding-right: 40px;
 }
+
+#header{
+  background-image: url('/static/photos/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}

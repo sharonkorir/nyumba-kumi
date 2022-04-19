@@ -2,6 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <!--display messages-->
+
+{% for neighbourhood in neighbourhood %}
 {% if messages %}
   {% for message in messages %}
     <div class="container center-align">
@@ -11,52 +13,54 @@
     </div>
   {% endfor %}
 {% endif %}
-{% for neighbourhood in neighbourhood %}
-<div class="container">
-  <div class="row center-align">
-    <form id="search-site" action="{% url 'search_results' %}" method='get'>
-      <div class="input-field">
-        <input placeholder="Find a business..."  id="search" type="text" class="validate" name="business">
+<div class="container-fluid" id="header" style="margin-top: 0%;">
+  <div class="container">
+    <div class="row center-align">
+      <form id="search-site" action="{% url 'search_results' %}" method='get'>
+        <div class="input-field white-text">
+          <input placeholder="Find a business..."  id="search" type="text" class="validate" name="business">
+        </div>
+      </form>
+      <div class="row center-align">
+        <p>Moving out?</p>
+        <button class="btn"><a href="{% url 'change_neighbourhood' neighbourhood.pk %}" class="white-text">Change Neighbourhood</a></button>
       </div>
-    </form>
+    </div>
   </div>
-  <div class="row center-align">
-    <p>Moving out?</p>
-    <button class="btn"><a href="{% url 'change_neighbourhood' neighbourhood.pk %}" class="white-text">Change Neighbourhood</a></button>
-  </div>
+</div> 
+<div class="container">
   <!--neighbourhood profile-->
-  <div class="row center-align">
-    <div class="card-image" style="height: 250px; width: 250px; padding: 40px;">
-    
+  <div class="row center-align" style="display: flex;">
+    <div class="card-image" style="height: 350px; width: 350px; padding: 20px;">
       {% if neighbourhood.logo %}
         <img src="{{neighbourhood.logo.url}}" alt="" class="responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
       {% else %}
         <img src="/static/photos/neighbourhood.jpg" alt="" class="responsive-img">
-      {% endif %}
-      
+      {% endif %} 
     </div>
-  </div>
-  <!--profile card-->
-  <div class="row center-align">
-    <p style="padding-right: 10px;">Name: <b>{{neighbourhood.name}}</b></p>
-    <p style="padding-right: 10px;">Location: <b>{{neighbourhood.location}}</b></p>
-  </div>
-  <div class="row center-align">
-    <p style="padding-right: 10px;"><b>{{businesses|length}}</b> businesses </p>
-    <p style="padding-right: 10px;"> <b>{{alerts|length}}</b> posts </p>
-    <p style="padding-right: 10px;"> <b>{{profile|length}}</b> occupants </p>
-  </div>
-  <div class="row center-align">
-    <p>{{neighbourhood.description}}</p>
-  </div>
-  <!--end profile card-->
-
-  <div class="row" style="display: flex;">
+    <div>
+      <div class="row center-align" style="display: flex;">
+        <p style="padding-right: 10px;">Name: <b>{{neighbourhood.name}}</b></p>
+        <p style="padding-right: 10px;">Location: <b>{{neighbourhood.location}}</b></p>
+      </div>
+      <div class="row center-align" style="display: flex;">
+        <p style="padding-right: 10px;"><b>{{businesses|length}}</b> businesses </p>
+        <p style="padding-right: 10px;"> <b>{{alerts|length}}</b> posts </p>
+        <p style="padding-right: 10px;"> <b>{{profile|length}}</b> occupants </p>
+      </div>
+      <div class="row center-align">
+        <p>About: {{neighbourhood.description}}</p>
+      </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row center-align" style="display: flex; justify-content: space-between;">
     <button class="btn">
-      <a href="{% url 'create_business' neighbourhood.pk %}">Create business</a>
+      <a href="{% url 'create_business' neighbourhood.pk %}" class="white-text">Create business</a>
     </button>
     <!-- Modal Trigger -->
     <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
+  </div>
     <!-- Modal Structure -->
     <div id="modal1{{neighbourhood.id}}" class="modal">
       <div class="modal-content">
@@ -74,37 +78,58 @@
     </div>
     <!--end modal-->
   </div>
-  {% endfor %} 
- 
-      
+  <div class="row"></div>
   <!--alerts-->
-  <div class="row" style="display: flex;">
-    <p>{{neighbourhood.name}} alerts</p>
-  </div>
-      
-      <div class="row">
-        
-        
-      </div>
-      <!--businesses-->
-      <div class="row">
-        <p>business</p>
-        {% if business.owner == user %}
-          <div style="padding-left: 10px;">
-            <a href="{% url 'business_update' business.pk %}"><i class="material-icons black-text">create</i></a>
-            <a href="{% url 'business_delete' business.pk %}"><i class="material-icons black-text">delete</i></a>
-          </div>
-        {% endif %}
+  {% endfor %} 
+
+  <div class="row center-align">
+    <p>Neighbourhood Alerts</p>
+    {% for alert in alerts %}
+    <div class="col s12 m4 l3" style="padding: 0px;" >
+      <div class="card-panel hoverable" id="card">
+        <div class="card-content">
+          <p style="padding-right: 10px;"><b>Name: </b>{{alert.name}}</p>
+        </div>
+        <div class="card-action">
+          <p style="padding-right: 10px;">{{alert.content}}</p>
+        </div>
       </div>
     </div>
-  </div> 
-  
-   
-  
+    {% endfor %}
+  </div>
+  <div class="row center-align">
+    <p>Businesses</p>
+    {% for business in businesses %}
+    <div class="col s12 m4 l3" style="padding: 0px;" >
+      <div class="card-panel hoverable" id="card">
+        <div class="card-image">
+          {% if business.logo %}
+          <img src="{{business.logo.url}}" alt="" class=" responsive-img">
+          {% else %}
+          <img src="/static/photos/business.jpg" alt="" class=" responsive-img">
+          {% endif %}
+        </div>
+        <div class="card-content" style="display: flex; justify-content: space-between;">
+          <p style="padding-right: 10px;"><b>Name: </b>{{business.name}}</p>
+        </div>
+        <div class="card-action">
+          <p>{{business.description}}</p>
+          <p>Contact us: {{business.email}}</p>
+          {% if business.owner == user %}
+            <div style="padding-left: 10px;">
+              <a href=""><i class="material-icons black-text">create</i></a>
+              <a href=""><i class="material-icons black-text">delete</i></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>     
+    </div>
+    {% endfor %}
+  </div>
 </div>
 
 <!--footer-->
-<div class="section center" style="color: grey; position: fixed; bottom: 0%; width: 100%;">
+<div class="section center" style="color: grey; width: 100%;">
   <p>2022 nyumba-kumi</p>
 </div>
 
