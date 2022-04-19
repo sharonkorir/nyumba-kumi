@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'nyumba_kumi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7ao39il3ni69e',
-        'USER': 'akfzryprbmzuaz',
-        'PASSWORD': 'e317015efc48c10638e82648ceb19d9c055d339ff74636d7987c7f7f44c680b0',
+        'NAME': 'd6v8joi0qnic69',
+        'USER': 'yldeqrpjfhakge',
+        'PASSWORD': 'fb5318a6c546d6496563aed64109e84adf59efb3d6ceb6fd7e0b2caba44f314b',
         'HOST':'ec2-52-18-116-67.eu-west-1.compute.amazonaws.com',
         'PORT': '5432'
     }
