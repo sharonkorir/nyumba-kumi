@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-  {{ block.super }}
+
   <div class="container">
     <div class="row" style="padding-top: 100px;">
       <div class="col s12 m3 l3"></div>
@@ -13,16 +13,17 @@
           <!--render form fields as paragraph-->
           {{ form|crispy }}
           <button type="submit" class="col s12 waves-effect waves-light btn">Login</button>
-        
+          <div class="row"></div>
+          <div class="row center-align">
+      
+            <p>Don't have an account? <a href="{% url 'register' %}"><strong>Sign up</strong></a></p>
+          
+          </div>
         </form>
       </div>
       <div class="col s12 m3 l3"></div>
     </div> 
-    <div class="row center-align">
-      
-        <p>Don't have an account? <a href="{% url 'register' %}"><strong>Sign up</strong></a></p>
-      
-    </div>
+    
   </div>
   <!--footer-->
 <div class="section center" style="color: grey; position: fixed; bottom: 0%; width: 100%;">

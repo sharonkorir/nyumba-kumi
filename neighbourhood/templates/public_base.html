@@ -32,48 +32,7 @@
       </div>
     {% endfor %}
   {% endif %}
-  <div class="container">
-    <div class="row center-align">
-      {% if users%}
-        <h5>Found {{ businesses|length }} with name '{{message}}'</h5>
-      {% else %}
-        <h5> Found 0 businesses with name '{{message}}'</h5>
-      {% endif %}
-    </div>
-    {% if businesses %}
-      {% for business in businesses %}
-      <div class="row">
-        {% if business.logo %}
-        <div style="display: flex; padding-left: 30px;align-items: center;">
-          <div class="card-image" style="height: 100px; width: 100px; padding: 20px;">
-            <img src="{{business.logo.url}}" alt="" class="circle responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
-          </div>
-          <!--link to business owner-->
-          <a href="">
-            <p><b>{{business.name}}</b></p>
-          </a>
-        </div>
-        {% else %}
-        <!--default business logo-->
-        <div style="display: flex; padding-left: 30px;align-items: center;">
-          <div class="card-image" style="height: 100px; width: 100px; padding: 20px;">
-            <img src="" alt="" class="circle responsive-img" style="height: 100%; width: 100%; object-fit: cover;">
-          </div>
-          <a href="{% url 'user_profile' username=user.user.username %}">
-            <p><b>{{business.name}}</b></p>
-          </a>
-        </div>
-        {% endif %}
-      </div>
-      {% endfor %}
-    {% endif %}
-    </div>
-  </div>
-  
-  <!--footer-->
-  <div class="section center" style="color: black; position: fixed; bottom: 0%; width: 100%;">
-    <b><p>2022 nyumba-kumi</p></b>
-  </div>
+ 
   <!--materialize scripts CDN-->
   
   <script
@@ -86,6 +45,5 @@
   
 </body>
 </html>
-
 
 

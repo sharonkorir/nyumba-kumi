@@ -14,7 +14,7 @@
 {% endif %}
 
   <div class="container">
-    <div class="row center-align" style="justify-content: center; align-items: center; padding-top:50px;">
+    <div class="row center-align" style="display:flex; justify-content: center; align-items: center; padding-top:50px;">
       <div class="card-image" style="height: 250px; width: 250px; padding: 40px;">
       
         {% if user.profile.profile_photo %}
@@ -24,36 +24,31 @@
         {% endif %}
         
       </div>
-      <div>
-        <div class="row" style="display: flex;">
-          <p style="padding-right: 10px;"><b>{{user.username}}</b></p>
-          <p style="padding-right: 10px;"><b>{{user.profile.neighbourhood.name}}</b></p>
-          <p><a href="">Edit Profile</a></p>
+      
+      <div class="row center-align">
+        <p style="padding-right: 10px;"><b>{{user.username}}</b></p>
+        <div class="row center-align" style="display: flex;">
+          <p style="padding-right: 10px;">{{user.profile.neighbourhood.name}}, <b>{{user.profile.neighbourhood.location}}</b> </p>
         </div>
-        <div class="row">
-          <form action="" method = 'POST' class="input-field col s12" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            <!--render form fields as paragraph-->
-            {{ u_form|crispy }}
-            {{ p_form|crispy }}
-            <button type="submit" class="col s12 waves-effect waves-light btn">Update</button>
-          
-          </form>
-        </div>
+      </div> 
+    </div>
+    <div class="row center-align">
+      {{user.profile.bio}}
+    </div>
+    <div class="row center-align" style="width: 80%;" id="login">
+      <h5>Edit your profile</h5>
+      <form action="" method = 'POST' class="input-field col s12" enctype="multipart/form-data">
+        {% csrf_token %}
         
-        <!-- <div class="row" style="display: flex;">
-          <p style="padding-right: 10px;"><b>{{businesses|length}}</b> businesses </p>
-          <p style="padding-right: 10px;"> followers </p>
-          <p style="padding-right: 10px;"> following </p>
-        </div> -->
-        <div class="row">
-          <p>{{user.profile.bio}}</p>
-        </div>
-      </div>
-    </div> 
+        <!--render form fields as paragraph-->
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+        <button type="submit" class="col s12 waves-effect waves-light btn">Update</button>
+      
+      </form>
+    </div>
    
-  
+  </div>
   <!--footer-->
   <div class="section center" style="color: #8c9395;">
     <p>2022 nyumba-kumi</p>
