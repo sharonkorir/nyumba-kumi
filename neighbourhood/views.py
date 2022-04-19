@@ -2,7 +2,7 @@ import profile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import Alerts, Business, Neighbourhood
+from .models import Alerts, Business, Neighbourhood, Profile
 from .forms import CreateAlertForm, CreateBusinessForm, CreateNeighbourhoodForm
 from django.contrib import messages
 from django.views.generic import CreateView
