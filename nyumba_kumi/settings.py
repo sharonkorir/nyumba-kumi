@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 import cloudinary, cloudinary.api, cloudinary.uploader
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-dmiy@+s@oyw148y)*j7u^a$!g&pw@1t_kiw4^9!m4^8+aibila
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nyumba-10.herokuapp.com']
 
 
 # Application definition
@@ -81,14 +82,25 @@ WSGI_APPLICATION = 'nyumba_kumi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'nyumbakumi',
+#         'USER': 'sharon',
+#         'PASSWORD': '12345678',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nyumbakumi',
-        'USER': 'sharon',
-        'PASSWORD': '12345678',
+        'NAME': 'd7ao39il3ni69e',
+        'USER': 'akfzryprbmzuaz',
+        'PASSWORD': 'e317015efc48c10638e82648ceb19d9c055d339ff74636d7987c7f7f44c680b0',
+        'HOST':'ec2-52-18-116-67.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432'
     }
 }
+
 
 
 # Password validation
@@ -129,6 +141,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
+
 
 cloudinary.config( 
   cloud_name = "dq2ipkrpz", 
