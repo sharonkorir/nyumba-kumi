@@ -94,6 +94,9 @@
           <div class="card-action">
             <p style="padding-right: 10px;">{{alert.content}}</p>
           </div>
+          <div class="grey-text" style="padding-left: 10px; padding-right: 10px;">
+            <p>Posted: {{alert.date_posted|timesince}} ago</p>
+          </div>
         </div>
       </div>
       {% endfor %}
