@@ -13,7 +13,7 @@
     </div>
   {% endfor %}
 {% endif %}
-<div class="container-fluid" id="header" style="margin-top: 0%;">
+<div class="container-fluid" style="margin-top: 0%;">
   <div class="container">
     <div class="row center-align">
       <form id="search-site" action="{% url 'search_results' %}" method='get'>
@@ -52,15 +52,17 @@
         <p>About: {{neighbourhood.description}}</p>
       </div>
     </div>
-</div>
-<div class="container">
-  <div class="row center-align" style="display: flex; justify-content: space-between;">
-    <button class="btn">
-      <a href="{% url 'create_business' neighbourhood.pk %}" class="white-text">Create business</a>
-    </button>
-    <!-- Modal Trigger -->
-    <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger">Create Post</button>
   </div>
+</div>
+<div class="container-fluid" id="header">
+  <div class="container" style="padding-top: 20px;">
+    <div class="row center-align">
+      <button class="cols12 btn">
+        <a href="{% url 'create_business' neighbourhood.pk %}" class="white-text">Create business</a>
+      </button>
+      <!-- Modal Trigger -->
+      <button data-target="modal1{{neighbourhood.id}}" class="btn modal-trigger cols12">Create Post</button>
+    </div>
     <!-- Modal Structure -->
     <div id="modal1{{neighbourhood.id}}" class="modal">
       <div class="modal-content">
@@ -77,61 +79,62 @@
       </div>
     </div>
     <!--end modal-->
-  </div>
-  <div class="row"></div>
-  <!--alerts-->
-  {% endfor %} 
-
-  <div class="row center-align">
-    <p>Neighbourhood Alerts</p>
-    {% for alert in alerts %}
-    <div class="col s12 m4 l3" style="padding: 0px;" >
-      <div class="card-panel hoverable" id="card">
-        <div class="card-content">
-          <p style="padding-right: 10px;"><b>Name: </b>{{alert.name}}</p>
-        </div>
-        <div class="card-action">
-          <p style="padding-right: 10px;">{{alert.content}}</p>
+    <div class="row"></div>
+    <!--alerts-->
+    {% endfor %} 
+  
+    <div class="row center-align">
+      <h5 class="white-text" style="font-weight: 800;">Neighbourhood Alerts</h5>
+      {% for alert in alerts %}
+      <div class="col s12 m4 l3" style="padding: 0px;" >
+        <div class="card-panel hoverable" id="card">
+          <div class="card-content">
+            <p style="padding-right: 10px;"><b>Name: </b>{{alert.name}}</p>
+          </div>
+          <div class="card-action">
+            <p style="padding-right: 10px;">{{alert.content}}</p>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+    <div class="row center-align">
+      <h5 class="white-text" style="font-weight: 800;">Businesses</h5>
+      {% for business in businesses %}
+      <div class="col s12 m4 l3" style="padding: 0px;" >
+        <div class="card-panel hoverable" id="card">
+          <div class="card-image">
+            {% if business.logo %}
+            <img src="{{business.logo.url}}" alt="" class=" responsive-img">
+            {% else %}
+            <img src="/static/photos/business.jpg" alt="" class=" responsive-img">
+            {% endif %}
+          </div>
+          <div class="card-content" style="display: flex; justify-content: space-between;">
+            <p style="padding-right: 10px;"><b>Name: </b>{{business.name}}</p>
+          </div>
+          <div class="card-action">
+            <p>{{business.description}}</p>
+            <p>Contact us: {{business.email}}</p>
+            {% if business.owner == user %}
+              <div style="padding-left: 10px;">
+                <a href=""><i class="material-icons black-text">create</i></a>
+                <a href=""><i class="material-icons black-text">delete</i></a>
+              </div>
+            {% endif %}
+          </div>
+        </div>     
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  <div class="row center-align">
-    <p>Businesses</p>
-    {% for business in businesses %}
-    <div class="col s12 m4 l3" style="padding: 0px;" >
-      <div class="card-panel hoverable" id="card">
-        <div class="card-image">
-          {% if business.logo %}
-          <img src="{{business.logo.url}}" alt="" class=" responsive-img">
-          {% else %}
-          <img src="/static/photos/business.jpg" alt="" class=" responsive-img">
-          {% endif %}
-        </div>
-        <div class="card-content" style="display: flex; justify-content: space-between;">
-          <p style="padding-right: 10px;"><b>Name: </b>{{business.name}}</p>
-        </div>
-        <div class="card-action">
-          <p>{{business.description}}</p>
-          <p>Contact us: {{business.email}}</p>
-          {% if business.owner == user %}
-            <div style="padding-left: 10px;">
-              <a href=""><i class="material-icons black-text">create</i></a>
-              <a href=""><i class="material-icons black-text">delete</i></a>
-            </div>
-          {% endif %}
-        </div>
-      </div>     
-    </div>
-    {% endfor %}
+  <!--footer-->
+  <div class="section center" style="color: white; width: 100%;">
+    <p>2022 nyumba-kumi</p>
   </div>
 </div>
 
-<!--footer-->
-<div class="section center" style="color: grey; width: 100%;">
-  <p>2022 nyumba-kumi</p>
-</div>
+
 
 
 {% endblock %}
